@@ -19,5 +19,5 @@ services:
 networks:
   dagster-network:
     external: true
-    name: dagster-network
+    name: ${NETWORK_NAME}
 

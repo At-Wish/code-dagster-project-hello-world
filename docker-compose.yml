@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  dagster:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dagster-hello-world
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    environment:
+      - DAGSTER_HOME=/app
+    restart: unless-stopped
+    networks:
+      - dagster-network
+
+networks:
+  dagster-network:
+    external: true
+    name: dagster-network
+

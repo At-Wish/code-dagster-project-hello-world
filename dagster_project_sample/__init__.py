@@ -1,8 +1,9 @@
-from dagster import Definitions, load_assets_from_modules
+from dagster import Definitions
 
-from . import assets
+from .assets.hello_world import hello_world
 
+# Explicitly list all assets
 defs = Definitions(
-    assets=load_assets_from_modules([assets]),
+    assets=[hello_world],
 )
 

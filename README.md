@@ -13,6 +13,7 @@ dagster_project_sample/
 ├── requirements.txt      # Python dependencies
 ├── Dockerfile            # Container definition
 ├── docker-compose.yml    # Docker Compose configuration
+├── workspace.yml         # Example workspace config for Dagster server
 └── README.md            # This file
 ```
 
@@ -40,11 +41,24 @@ This container runs a gRPC code location server on port 4000 that your existing 
 docker-compose up --build
 ```
 
-2. Connect to your existing Dagster server:
-   - In your existing Dagster server configuration, add this code location:
-     - **Host**: `dagster-hello-world` (container name) or the container's IP on the network
-     - **Port**: `4000`
-     - **Module**: `dagster_project_sample`
+2. **IMPORTANT for Cloud Server**: Connect to your existing Dagster server:
+   - The `workspace.yml` file must be on your **Dagster server's** directory (not this project)
+   - Add this code location to your Dagster server's `workspace.yml` file:
+   ```yaml
+   load_from:
+     - grpc_server:
+         host: dagster-hello-world  # Container name if on same Docker network
+         port: 4000
+         location_name: dagster_project_sample
+   ```
+   - **Host options** (try in this order):
+     - `dagster-hello-world` (container name - works if on same Docker network)
+     - Container IP address (find with: `docker inspect dagster-hello-world`)
+     - Service name if in same docker-compose file
+   - **Port**: `4000` (gRPC server port)
+   - **location_name**: `dagster_project_sample` (optional, but recommended)
+   - See `workspace.yml` in this project for a reference configuration
+   - **Troubleshooting**: See `TROUBLESHOOTING.md` for detailed cloud server setup help
 
 3. Access your existing Dagster UI and you should see the `hello_world` asset available
 

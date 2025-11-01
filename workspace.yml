@@ -1,0 +1,6 @@
+load_from:
+  - grpc_server:
+      host: dagster-hello-world  # Use container name if on same Docker network, or use container IP/hostname
+      port: 4000
+      location_name: dagster_project_sample
+

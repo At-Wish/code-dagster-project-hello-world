@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: dagster-project-sample:latest
     container_name: dagster-hello-world
     volumes:
       - .:/app

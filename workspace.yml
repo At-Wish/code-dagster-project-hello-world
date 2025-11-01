@@ -3,4 +3,5 @@ load_from:
       host: dagster-hello-world  # Use container name if on same Docker network, or use container IP/hostname
       port: 4000
       location_name: dagster_project_sample
+      container_image: dagster-project-sample:latest  # Docker image to use when launching runs
 

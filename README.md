@@ -50,6 +50,7 @@ docker-compose up --build
          host: dagster-hello-world  # Container name if on same Docker network
          port: 4000
          location_name: dagster_project_sample
+         container_image: dagster-project-sample:latest  # REQUIRED: Docker image for runs
    ```
    - **Host options** (try in this order):
      - `dagster-hello-world` (container name - works if on same Docker network)
@@ -57,8 +58,8 @@ docker-compose up --build
      - Service name if in same docker-compose file
    - **Port**: `4000` (gRPC server port)
    - **location_name**: `dagster_project_sample` (optional, but recommended)
+   - **container_image**: `dagster-project-sample:latest` (REQUIRED - Docker image name to use when launching runs)
    - See `workspace.yml` in this project for a reference configuration
-   - **Troubleshooting**: See `TROUBLESHOOTING.md` for detailed cloud server setup help
 
 3. Access your existing Dagster UI and you should see the `hello_world` asset available
 
